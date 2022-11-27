@@ -74,14 +74,18 @@ WSGI_APPLICATION = 'mobile_shop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+db_user = 'postgres'
+
+db_password = 'admin'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'mobile_phones_db',
-        'USER': 'postgres',
-        'PASSWORD': 'admin',
-        'HOST' : '0.0.0.0',
-        'PORT' : '8080'
+        'USER': db_user,
+        'PASSWORD': db_password,
+        'HOST' : 'localhost',
+        'PORT' : '5432'
     }
 }
 
