@@ -18,8 +18,22 @@ class Model_id(models.Model):
     def __str__(self):
         return '%s %s' % (self.brand, self.name)
 
+COLORS_OF_PHONES_CHOICES = [
+    ('R', 'Red'),
+    ('B', 'Black'),
+    ('BL', 'Blue'),
+    ('Y', 'Yellow'),
+    ('GR', 'Green'),
+    ('G', 'Gray'),
+]
+
 class Phone(models.Model):
     title = models.CharField(max_length=30)
     model_id = models.ForeignKey(Model_id, on_delete = models.CASCADE)
     quantity = models.IntegerField(null=True)
-    price = models.DecimalField(decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    color = models.CharField(max_length=2,
+                    choices = COLORS_OF_PHONES_CHOICES,
+                    default = 'B')
+    def __str__(self):
+        return '%s %s' % (self.title, self.model_id)
