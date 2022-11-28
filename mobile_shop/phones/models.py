@@ -12,7 +12,7 @@ class Model_id(models.Model):
     name = models.CharField(max_length=30)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE) 
     specs = models.TextField()
-    image = models.ImageField(blank=True)
+    image = models.ImageField(blank=True, upload_to='static/phones/img')
     description = models.TextField()
 
     def __str__(self):
