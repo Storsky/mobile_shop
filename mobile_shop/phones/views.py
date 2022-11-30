@@ -8,3 +8,8 @@ def show_products(request):
     template = 'phones.html'
     context = {'phones': Model_id.objects.all()}
     return render(request, template, context)
+
+def show_login_page(request):
+    template = 'login.html'
+    context = {}
+    return render(request, template, context)
