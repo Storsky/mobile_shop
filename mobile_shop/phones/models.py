@@ -1,6 +1,8 @@
 from django.db import models
 
 
+
+
 class Brand(models.Model):
     name = models.CharField(max_length=30, unique=True)
     description = models.TextField(blank=True)
@@ -14,7 +16,8 @@ class Model_id(models.Model):
     specs = models.TextField()
     image = models.ImageField(blank=True, upload_to='static/phones/img')
     description = models.TextField()
-
+    
+    
     def __str__(self):
         return '%s %s' % (self.brand, self.name)
 
@@ -35,5 +38,6 @@ class Phone(models.Model):
     color = models.CharField(max_length=2,
                     choices = COLORS_OF_PHONES_CHOICES,
                     default = 'B')
+    
     def __str__(self):
         return '%s %s' % (self.title, self.model_id)

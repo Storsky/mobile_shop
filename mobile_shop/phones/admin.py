@@ -5,6 +5,7 @@ class BrandAdmin(admin.ModelAdmin):
     list_display = ['name', 'description']
 
 class Model_idAdmin(admin.ModelAdmin):
+   
     list_display = ['name', 'brand', 'specs', 'image', 'description']
 
 class PhoneAdmin(admin.ModelAdmin):
