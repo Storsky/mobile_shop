@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Model_id
+from django.core.paginator import Paginator
+
 def index(request):
     return redirect('catalog')
 
@@ -13,7 +15,12 @@ def show_products(request):
         phones = Model_id.objects.order_by('name')
     else:
         phones = Model_id.objects.all()
-    context = {'phones': phones}
+    
+    paginator = Paginator(phones, 2)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number) 
+    context = {'phones': page_obj}
+
     return render(request, template, context)
 
 def show_login_page(request):
