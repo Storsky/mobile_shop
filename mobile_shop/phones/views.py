@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Model_id
+from .models import Product
 from django.core.paginator import Paginator
 
 def index(request):
@@ -10,11 +10,11 @@ def show_products(request):
     template = 'phones.html'
     sort = request.GET.get("sort")
     if sort=='brand':
-        phones = Model_id.objects.order_by('brand')
+        phones = Product.objects.order_by('brand')
     elif sort=='alphabet':
-        phones = Model_id.objects.order_by('name')
+        phones = Product.objects.order_by('name')
     else:
-        phones = Model_id.objects.all()
+        phones = Product.objects.all()
     
     paginator = Paginator(phones, 2)
     page_number = request.GET.get('page')
@@ -28,7 +28,7 @@ def show_login_page(request):
     context = {}
     return render(request, template, context)
 
-def show_model(request, model_id):
+def show_model(request, product_pk):
     template = 'product.html'
-    context = {'phone': Model_id.objects.filter(id=model_id).values()[0]}
+    context = {'phone': Product.objects.filter(id=product_pk).values()[0]}
     return render(request, template, context)

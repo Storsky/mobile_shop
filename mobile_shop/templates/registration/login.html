@@ -11,8 +11,9 @@
 <body>
     <br>
 <br>
+<a href="{% url "social:begin" "google-oauth2" %}">Google+</a>
+<br>    
     <div class="cont">
-
             <h2>Welcome</h2>
                 <form method="post">
                 {% csrf_token %}
