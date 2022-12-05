@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Product
 from django.core.paginator import Paginator
+from datetime import datetime as dt
+from django.contrib import messages as messages
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return redirect('catalog')
@@ -28,7 +31,14 @@ def show_login_page(request):
     context = {}
     return render(request, template, context)
 
-def show_model(request, product_pk):
+def show_product(request, product_pk):
     template = 'product.html'
     context = {'phone': Product.objects.filter(id=product_pk).values()[0]}
     return render(request, template, context)
+
+
+@login_required
+def buy_product(request, product_pk, action):
+    if action == 'buy':
+        messages.success(request, f'Вы купили {product_pk}')
+    return redirect ('catalog')

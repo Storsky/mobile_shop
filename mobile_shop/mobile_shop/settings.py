@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'phones',
     'signup',
-    'social_django'
+    'social_django',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -140,7 +141,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+LOGIN_URL = '/accounts/login'
 LOGIN_REDIRECT_URL = "/"
 
 # DJANGO_SOCIAL AUTH BACKENDS
