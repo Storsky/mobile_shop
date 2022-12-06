@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import Profile
 
 COLORS_OF_PHONES_CHOICES = [
     ('R', 'Red'),
@@ -27,8 +28,13 @@ class Product(models.Model):
     color = models.CharField(max_length=2,
                     choices = COLORS_OF_PHONES_CHOICES,
                     default = 'B')
+    profiles = models.ManyToManyField(Profile, through='ProfileProduct', related_name='products')
     
     def __str__(self):
         return '%s %s' % (self.brand, self.name)
 
 
+class ProfileProduct(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='ProfileProduct')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ProfileProduct')
+    created_at = models.DateTimeField(auto_now_add=True)

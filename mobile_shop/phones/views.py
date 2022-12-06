@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Product
+from .models import Product, ProfileProduct
 from django.core.paginator import Paginator
+from users.models import Profile
 from datetime import datetime as dt
 from django.contrib import messages as messages
 from django.contrib.auth.decorators import login_required
@@ -40,5 +41,8 @@ def show_product(request, product_pk):
 @login_required
 def buy_product(request, product_pk, action):
     if action == 'buy':
-        messages.success(request, f'Вы купили {product_pk}')
+        current_user = request.user.id
+        new_order = ProfileProduct(profile = Profile.objects.get(pk=current_user), product = Product.objects.get(pk=product_pk))
+        new_order.save()
+        messages.success(request, f'Вы купили {Product.objects.get(pk=product_pk)}')
     return redirect ('catalog')

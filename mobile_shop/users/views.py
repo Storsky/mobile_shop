@@ -21,10 +21,10 @@ def profile(request):
     
     
     
-    
+    goods = request.user.profile.products.all()
     
     
     template = 'users\profile.html'
-    context = {'user_form': user_form, 'profile_form': profile_form}
+    context = {'user_form': user_form, 'profile_form': profile_form, 'goods': goods}
     return render(request, template, context)
 
