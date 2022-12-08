@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from .models import Product, ProfileProduct
 from django.core.paginator import Paginator
 from users.models import Profile
-from datetime import datetime as dt
 from django.contrib import messages as messages
 from django.contrib.auth.decorators import login_required
+from .forms import ReviewForm as rf
+from users.models import Profile
+
 
 def index(request):
     return redirect('catalog')
@@ -34,7 +36,19 @@ def show_login_page(request):
 
 def show_product(request, product_pk):
     template = 'product.html'
-    context = {'phone': Product.objects.filter(id=product_pk)[0]}
+    phone = Product.objects.filter(id=product_pk)[0]
+    reviews = phone.reviews.all()
+    new_review = None
+    if request.method == 'POST':
+        review_form = rf(data=request.POST)
+        if review_form.is_valid():
+            new_review = review_form.save(commit=False)
+            new_review.phone = phone
+            new_review.user = request.user.profile
+            new_review.save()
+    else:
+        review_form = rf()       
+    context = {'phone': phone, 'reviews': reviews, 'new_review': new_review, 'review_form': rf} 
     return render(request, template, context)
 
 

@@ -13,23 +13,36 @@
         <p>{{phone.description}}</p></div>
         <a target="_self" href="/catalog/model/{{phone.id}}&buy" class="btn btn-dark btn-lg">BUY NOW</a>
       </div>
-      <div class="comment">
-      <h2>Reviews!</h2>
-      <hr>
-      {% if not phone.reviews.all %}
-
-      {% else %}
-      {% for review in phone.reviews.all %}
-      
-      <h5>{{review.user}}</h5>
-      <br>
-      {{review.text}}
-      {{review.date}}
-      <hr>
-      {% endfor%}
-      {% endif %}
-      
-      </div>
   </div>
+    <div class="col-md-8 card mb-4  mt-3 ">
+      <div class="card-body">
+        <!-- comments -->
+        <h5>{{ reviews.count }} comments</h5>
+
+        {% for review in reviews %}
+        <div class="reviews" style="padding: 10px;">
+          <p class="font-weight-bold">
+            {{ review.user }}
+            <span class=" text-muted font-weight-normal">
+              {{ review.date }}
+            </span>
+          </p>
+          {{ review.text | linebreaks }}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-8 card mb-4  mt-3 ">
+      <div class="card-body">
+        <h3>Leave a review</h3>
+        <form method="post" style="margin-top: 1.3em;">
+          {{ review_form.as_p }}
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
  {% endblock %}
