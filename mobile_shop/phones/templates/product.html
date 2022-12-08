@@ -6,13 +6,30 @@
   <div class="header">
     <h1>{{phone.name}}</h1>
   </div>
-    <div class = "container">
-      <img height="400" src="\{{phone.image}}" class="container-img" alt="Изображение телефона"/>
-    <div class="cotainer-content">
-    <p><h1 = containter-name>Вот смотрите, каков:</h1></p>
-    <p>{{phone.description}}</p></div>
-    <a target="_blank" href="/catalog/model/{{phone.id}}&buy" class="container-btn">BUY NOW</a>
+  <div class = "container__content">
+      <img height="400" src="\{{phone.image}}" class="container__img" alt="Изображение телефона"/>
+      <div class="cotainer-content">
+        <p><h1 = containter-name>Вот смотрите, каков:</h1></p>
+        <p>{{phone.description}}</p></div>
+        <a target="_self" href="/catalog/model/{{phone.id}}&buy" class="btn btn-dark btn-lg">BUY NOW</a>
+      </div>
+      <div class="comment">
+      <h2>Reviews!</h2>
+      <hr>
+      {% if not phone.reviews.all %}
+
+      {% else %}
+      {% for review in phone.reviews.all %}
+      
+      <h5>{{review.user}}</h5>
+      <br>
+      {{review.text}}
+      {{review.date}}
+      <hr>
+      {% endfor%}
+      {% endif %}
+      
+      </div>
   </div>
-    
- </div>
+</div>
  {% endblock %}

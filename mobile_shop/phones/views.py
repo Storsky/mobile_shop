@@ -34,7 +34,7 @@ def show_login_page(request):
 
 def show_product(request, product_pk):
     template = 'product.html'
-    context = {'phone': Product.objects.filter(id=product_pk).values()[0]}
+    context = {'phone': Product.objects.filter(id=product_pk)[0]}
     return render(request, template, context)
 
 
