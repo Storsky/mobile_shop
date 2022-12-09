@@ -7,4 +7,5 @@ urlpatterns = [
     path('login', show_login_page, name='login_page'),
     path('catalog/model/<int:product_pk>', show_product, name='product'),
     path('catalog/model/<int:product_pk>&<action>', buy_product),
+    path('search_phones', search_phones, name = 'search'),
 ]

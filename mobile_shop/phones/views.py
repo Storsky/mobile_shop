@@ -6,6 +6,19 @@ from django.contrib import messages as messages
 from django.contrib.auth.decorators import login_required
 from .forms import ReviewForm as rf
 from users.models import Profile
+from django.db.models import Q
+
+def search_phones(request):
+    template = 'search.html'
+    if request.method == "POST":
+        searched = request.POST['searched']
+        searched_phones = Product.objects.filter(Q(name__icontains = searched)| Q(brand__name__icontains = searched))
+        
+        
+        context = {'searched':searched, 'searched_phones': searched_phones}
+        return render(request, template, context)
+    else:
+        return render(request, template, context)
 
 
 def index(request):

@@ -20,6 +20,11 @@
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <form class="d-flex" method=POST action="{% url 'search' %}">
+              {% csrf_token %}
+              <input class="form-control me-2" type="search" placeholder="Search phones" aria-label="Search" name="searched">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ml-auto">
                   <a href="/profile" class="nav-item nav-link">Profile</a>

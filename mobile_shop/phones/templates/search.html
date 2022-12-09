@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Витрина{% endblock %}
+
+{% block content %}
+<center>  
+{%if searched %}
+    <h3>Поиск '{{searched}}'</h3>
+    <hr>
+    {% for phone in searched_phones %}
+    <div class="phone">
+        <a class="name" href="catalog/model/{{phone.id}}">Название: {{phone.name}}</a>
+        <div class="specs">Характеристики: {{ phone.specs }}</div>
+        <img height="400" src="{{ phone.image }}" alt="{{ phone.name }}"/>
+    </div>
+    {% endfor %}
+{% else %}
+    <h3>Введите параметры поиска</h3>
+    {% endif %}
+<div>
+
+    
+</div>
+{% endblock %}
